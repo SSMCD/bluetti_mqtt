@@ -136,6 +136,7 @@ NORMAL_DEVICE_FIELDS = {
             'device_class': 'voltage',
             'state_class': 'measurement',
             'force_update': True,
+            'entity_category': 'diagnostic',
         }
     ),
     'internal_current_one': MqttFieldConfig(
@@ -148,6 +149,7 @@ NORMAL_DEVICE_FIELDS = {
             'device_class': 'current',
             'state_class': 'measurement',
             'force_update': True,
+            'entity_category': 'diagnostic',
         }
     ),
     'internal_power_one': MqttFieldConfig(
@@ -160,6 +162,7 @@ NORMAL_DEVICE_FIELDS = {
             'device_class': 'power',
             'state_class': 'measurement',
             'force_update': True,
+            'entity_category': 'diagnostic',
         }
     ),
     'internal_ac_frequency': MqttFieldConfig(
@@ -172,6 +175,7 @@ NORMAL_DEVICE_FIELDS = {
             'device_class': 'frequency',
             'state_class': 'measurement',
             'force_update': True,
+            'entity_category': 'diagnostic',
         }
     ),
     'internal_current_two': MqttFieldConfig(
@@ -184,6 +188,7 @@ NORMAL_DEVICE_FIELDS = {
             'device_class': 'current',
             'state_class': 'measurement',
             'force_update': True,
+            'entity_category': 'diagnostic',
         }
     ),
     'internal_power_two': MqttFieldConfig(
@@ -196,6 +201,7 @@ NORMAL_DEVICE_FIELDS = {
             'device_class': 'power',
             'state_class': 'measurement',
             'force_update': True,
+            'entity_category': 'diagnostic',
         }
     ),
     'ac_input_voltage': MqttFieldConfig(
@@ -208,6 +214,7 @@ NORMAL_DEVICE_FIELDS = {
             'device_class': 'voltage',
             'state_class': 'measurement',
             'force_update': True,
+            'entity_category': 'diagnostic',
         }
     ),
     'internal_current_three': MqttFieldConfig(
@@ -220,6 +227,7 @@ NORMAL_DEVICE_FIELDS = {
             'device_class': 'current',
             'state_class': 'measurement',
             'force_update': True,
+            'entity_category': 'diagnostic',
         }
     ),
     'internal_power_three': MqttFieldConfig(
@@ -232,6 +240,7 @@ NORMAL_DEVICE_FIELDS = {
             'device_class': 'power',
             'state_class': 'measurement',
             'force_update': True,
+            'entity_category': 'diagnostic',
         }
     ),
     'ac_input_frequency': MqttFieldConfig(
@@ -244,6 +253,7 @@ NORMAL_DEVICE_FIELDS = {
             'device_class': 'frequency',
             'state_class': 'measurement',
             'force_update': True,
+            'entity_category': 'diagnostic',
         }
     ),
     'total_battery_voltage': MqttFieldConfig(
@@ -256,6 +266,7 @@ NORMAL_DEVICE_FIELDS = {
             'device_class': 'voltage',
             'state_class': 'measurement',
             'force_update': True,
+            'entity_category': 'diagnostic',
         }
     ),
     'total_battery_current': MqttFieldConfig(
@@ -268,6 +279,19 @@ NORMAL_DEVICE_FIELDS = {
             'device_class': 'current',
             'state_class': 'measurement',
             'force_update': True,
+            'entity_category': 'diagnostic',
+        }
+    ),
+    'temperature': MqttFieldConfig(
+        type=MqttFieldType.NUMERIC,
+        setter=False,
+        advanced=False,
+        home_assistant_extra={
+            'name': 'Temperature',
+            'unit_of_measurement': '°F',
+            'device_class': 'temperature',
+            'state_class': 'measurement',
+            'entity_category': 'diagnostic',
         }
     ),
     'ups_mode': MqttFieldConfig(
@@ -277,6 +301,7 @@ NORMAL_DEVICE_FIELDS = {
         home_assistant_extra={
             'name': 'UPS Working Mode',
             'options': ['CUSTOMIZED', 'PV_PRIORITY', 'STANDARD', 'TIME_CONTROL'],
+            'entity_category': 'config',
         }
     ),
     'split_phase_on': MqttFieldConfig(
@@ -285,6 +310,7 @@ NORMAL_DEVICE_FIELDS = {
         advanced=False,
         home_assistant_extra={
             'name': 'Split Phase',
+            'entity_category': 'diagnostic',
         }
     ),
     'split_phase_machine_mode': MqttFieldConfig(
@@ -293,6 +319,7 @@ NORMAL_DEVICE_FIELDS = {
         advanced=False,
         home_assistant_extra={
             'name': 'Split Phase Machine',
+            'entity_category': 'diagnostic',
         }
     ),
     'grid_charge_on': MqttFieldConfig(
@@ -301,6 +328,7 @@ NORMAL_DEVICE_FIELDS = {
         advanced=False,
         home_assistant_extra={
             'name': 'Grid Charge',
+            'entity_category': 'config',
         }
     ),
     'time_control_on': MqttFieldConfig(
@@ -309,6 +337,7 @@ NORMAL_DEVICE_FIELDS = {
         advanced=False,
         home_assistant_extra={
             'name': 'Time Control',
+            'entity_category': 'config',
         }
     ),
     'battery_range_start': MqttFieldConfig(
@@ -321,6 +350,7 @@ NORMAL_DEVICE_FIELDS = {
             'min': 0,
             'max': 100,
             'unit_of_measurement': '%',
+            'entity_category': 'config',
         }
     ),
     'battery_range_end': MqttFieldConfig(
@@ -333,6 +363,7 @@ NORMAL_DEVICE_FIELDS = {
             'min': 0,
             'max': 100,
             'unit_of_measurement': '%',
+            'entity_category': 'config',
         }
     ),
     'led_mode': MqttFieldConfig(
@@ -362,6 +393,7 @@ NORMAL_DEVICE_FIELDS = {
             'name': 'Screen Auto Sleep Mode',
             'icon': 'mdi:sleep',
             'options': ['THIRTY_SECONDS', 'ONE_MINUTE', 'FIVE_MINUTES', 'NEVER'],
+            'entity_category': 'config',
         }
     ),
     'eco_on': MqttFieldConfig(
@@ -371,6 +403,7 @@ NORMAL_DEVICE_FIELDS = {
         home_assistant_extra={
             'name': 'ECO',
             'icon': 'mdi:sprout',
+            'entity_category': 'config',
         }
     ),
     'eco_shutdown': MqttFieldConfig(
@@ -390,7 +423,8 @@ NORMAL_DEVICE_FIELDS = {
         home_assistant_extra={
             'name': 'Charging Mode',
             'icon': 'mdi:battery-charging',
-            'options': ['STANDARD', 'SILENT', 'TURBO'],
+            'options': ['STANDARD', 'SILENT'],
+            'entity_category': 'config',
         }
     ),
     'power_lifting_on': MqttFieldConfig(
@@ -400,6 +434,34 @@ NORMAL_DEVICE_FIELDS = {
         home_assistant_extra={
             'name': 'Power Lifting',
             'icon': 'mdi:arm-flex',
+            'entity_category': 'config',
+        }
+    ),
+    'protocol_version': MqttFieldConfig(
+        type=MqttFieldType.NUMERIC,
+        setter=False,
+        advanced=True,
+        home_assistant_extra={
+            'name': 'Protocol Version',
+            'entity_category': 'diagnostic',
+        }
+    ),
+    'arm_version': MqttFieldConfig(
+        type=MqttFieldType.NUMERIC,
+        setter=False,
+        advanced=True,
+        home_assistant_extra={
+            'name': 'Arm Version',
+            'entity_category': 'diagnostic',
+        }
+    ),
+    'dsp_version': MqttFieldConfig(
+        type=MqttFieldType.NUMERIC,
+        setter=False,
+        advanced=True,
+        home_assistant_extra={
+            'name': 'DSP Version',
+            'entity_category': 'diagnostic',
         }
     ),
 }
@@ -445,16 +507,6 @@ DC_INPUT_FIELDS = {
 
 def battery_pack_fields(pack: int):
     return {
-        'pack_status': MqttFieldConfig(
-            type=MqttFieldType.ENUM,
-            setter=False,
-            advanced=True,
-            home_assistant_extra={
-                'name': f'Battery Pack {pack} Status',
-                'value_template': '{{ value_json.status }}'
-            },
-            id_override=f'pack_status{pack}'
-        ),
         'pack_voltage': MqttFieldConfig(
             type=MqttFieldType.NUMERIC,
             setter=False,
@@ -465,23 +517,260 @@ def battery_pack_fields(pack: int):
                 'device_class': 'voltage',
                 'state_class': 'measurement',
                 'force_update': True,
-                'value_template': '{{ value_json.voltage }}'
+                'value_template': '{{ value_json.voltage }}',
+                'entity_category': 'diagnostic'
             },
             id_override=f'pack_voltage{pack}'
         ),
-        'pack_battery_percent': MqttFieldConfig(
+        'pack_soc': MqttFieldConfig(
             type=MqttFieldType.NUMERIC,
             setter=False,
             advanced=False,
             home_assistant_extra={
-                'name': f'Battery Pack {pack} Percent',
+                'name': f'Battery Pack {pack} SoC',
                 'unit_of_measurement': '%',
                 'device_class': 'battery',
                 'state_class': 'measurement',
-                'value_template': '{{ value_json.percent }}'
+                'value_template': '{{ value_json.soc }}',
+                'entity_category': 'diagnostic'
             },
-            id_override=f'pack_percent{pack}'
+            id_override=f'pack_soc{pack}'
         ),
+        'pack_bms_version': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} BMS Version',
+                'value_template': '{{ value_json.bms_version }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_bms{pack}'
+        ),
+        'cell_voltage_1': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 1',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[0] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_1'
+        ),
+        'cell_voltage_2': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 2',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[1] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_2'
+        ),
+        'cell_voltage_3': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 3',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[2] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_3'
+        ),
+        'cell_voltage_4': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 4',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[3] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_4'
+        ),
+        'cell_voltage_5': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 5',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[4] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_5'
+        ),
+        'cell_voltage_6': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 6',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[5] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_6'
+        ),
+        'cell_voltage_7': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 7',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[6] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_7'
+        ),
+        'cell_voltage_8': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 8',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[7] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_8'
+        ),
+        'cell_voltage_9': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 9',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[8] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_9'
+        ),
+        'cell_voltage_10': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 10',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[9] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_10'
+        ),
+        'cell_voltage_11': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 11',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[10] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_11'
+        ),
+        'cell_voltage_12': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 12',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[11] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_12'
+        ),
+        'cell_voltage_13': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 13',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[12] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_13'
+        ),
+        'cell_voltage_14': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 14',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[13] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_14'
+        ),
+        'cell_voltage_15': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 15',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[14] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_15'
+        ),
+        'cell_voltage_16': MqttFieldConfig(
+            type=MqttFieldType.NUMERIC,
+            setter=False,
+            advanced=False,
+            home_assistant_extra={
+                'name': f'Battery Pack {pack} Cell Voltage 16',
+                'unit_of_measurement': 'V',
+                'device_class': 'voltage',
+                'state_class': 'measurement',
+                'value_template': '{{ value_json.voltages[15] }}',
+                'entity_category': 'diagnostic'
+            },
+            id_override=f'pack_{pack}_cell_voltage_16'
+        )
     }
 
 
@@ -609,8 +898,8 @@ class MQTTClient:
             fields = battery_pack_fields(pack)
             for name, field in fields.items():
                 # Skip fields not supported by the device
-                if not device.has_field(name):
-                    continue
+                # if not device.has_field(name):
+                    # continue
 
                 # Publish config
                 await client.publish(
@@ -718,12 +1007,12 @@ class MQTTClient:
 
     def _build_pack_details(self, parsed: dict):
         details = {}
-        if 'pack_status' in parsed:
-            details['status'] = parsed['pack_status'].name
-        if 'pack_battery_percent' in parsed:
-            details['percent'] = parsed['pack_battery_percent']
+        if 'pack_soc' in parsed:
+            details['soc'] = parsed['pack_soc']
         if 'pack_voltage' in parsed:
             details['voltage'] = float(parsed['pack_voltage'])
         if 'cell_voltages' in parsed:
             details['voltages'] = [float(d) for d in parsed['cell_voltages']]
+        if 'pack_bms_version' in parsed:
+            details['bms_version'] = float(parsed['pack_bms_version'])
         return details

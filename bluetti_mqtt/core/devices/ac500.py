@@ -35,6 +35,10 @@ class AutoSleepMode(Enum):
     FIVE_MINUTES = 4
     NEVER = 5
 
+@unique
+class ChargingMode(Enum):                                                   # ADDED
+    STANDARD = 0
+    SILENT = 1
 
 class AC500(BluettiDevice):
     def __init__(self, address: str, sn: str):
@@ -42,14 +46,17 @@ class AC500(BluettiDevice):
 
         # Core
         self.struct.add_string_field('device_type', 10, 6)
+        self.struct.add_uint_field('protocol_version', 16)                  # ADDED
         self.struct.add_sn_field('serial_number', 17)
         self.struct.add_version_field('arm_version', 23)
         self.struct.add_version_field('dsp_version', 25)
+        # self.struct.add_version_field('bms_version', 27)                  # ADDED
+        # self.struct.add_version_field('iot_version', 29)                  # ADDED
         self.struct.add_uint_field('dc_input_power', 36)
         self.struct.add_uint_field('ac_input_power', 37)
         self.struct.add_uint_field('ac_output_power', 38)
         self.struct.add_uint_field('dc_output_power', 39)
-        self.struct.add_decimal_field('power_generation', 41, 1)  # Total power generated since last reset (kwh)
+        self.struct.add_decimal_field('power_generation', 41, 1)            # Total power generated since last reset (kwh)
         self.struct.add_uint_field('total_battery_percent', 43)
         self.struct.add_bool_field('ac_output_on', 48)
         self.struct.add_bool_field('dc_output_on', 49)
@@ -71,12 +78,16 @@ class AC500(BluettiDevice):
         self.struct.add_decimal_field('internal_dc_input_current', 88, 1)
 
         # Battery Data
-        self.struct.add_uint_field('pack_num_max', 91)
+        # self.struct.add_uint_field('pack_num_max', 91)                    # COMMENT AND SET 'pack_num_max' TO 2
         self.struct.add_decimal_field('total_battery_voltage', 92, 1)
+        self.struct.add_decimal_field('total_battery_current', 93, 1)       # ADDED
+        self.struct.add_uint_field('total_soc', 94)                         # ADDED
+        self.struct.add_uint_field('temperature', 95)                       # ADDED
         self.struct.add_uint_field('pack_num', 96)
-        self.struct.add_decimal_field('pack_voltage', 98, 2)  # Full pack voltage
-        self.struct.add_uint_field('pack_battery_percent', 99)
+        self.struct.add_decimal_field('pack_voltage', 98, 2)                # Full pack voltage
+        self.struct.add_uint_field('pack_soc', 99)                          # CHANGE FROM 'pack_battery_percent' to 'pack_soc'
         self.struct.add_decimal_array_field('cell_voltages', 105, 16, 2)
+        self.struct.add_version_field('pack_bms_version', 201)              # ADDED
 
         # Controls
         self.struct.add_enum_field('ups_mode', 3001, UpsMode)
@@ -85,32 +96,40 @@ class AC500(BluettiDevice):
         self.struct.add_uint_field('pack_num', 3006)
         self.struct.add_bool_field('ac_output_on', 3007)
         self.struct.add_bool_field('dc_output_on', 3008)
+        # self.struct.add_bool_field('pv_control', 3009)                    # ADDED - NOT WORKING
+        # self.struct.add_bool_field('feed_switch', 3010)                   # ADDED - NOT WORKING
         self.struct.add_bool_field('grid_charge_on', 3011)
+        # self.struct.add_bool_field('meter_enable_switch', 3012)           # ADDED - NOT WORKING
         self.struct.add_bool_field('time_control_on', 3013)
         self.struct.add_uint_field('battery_range_start', 3015)
         self.struct.add_uint_field('battery_range_end', 3016)
+        # self.struct.add_bool_field('maxChgCurrentOfGrid', 3019)           # ADDED - NOT WORKING
+        # self.struct.add_bool_field('maxDischargingCurrentOfGrid', 3020)   # ADDED - NOT WORKING
         # 3031-3033 is the current device time & date without a timezone
         self.struct.add_bool_field('bluetooth_connected', 3036)
         # 3039-3056 is the time control programming
         self.struct.add_enum_field('auto_sleep_mode', 3061, AutoSleepMode)
+        self.struct.add_bool_field('eco_on', 3063)                          # ADDED
+        self.struct.add_enum_field('charging_mode', 3065, ChargingMode)     # ADDED
+        self.struct.add_bool_field('power_lifting_on', 3066)                # ADDED
 
         super().__init__(address, 'AC500', sn)
 
     @property
     def pack_num_max(self):
-        return 6
+        return 2                                                            # SET TO TWO
 
     @property
     def polling_commands(self) -> List[ReadHoldingRegisters]:
         return [
             ReadHoldingRegisters(10, 40),
-            ReadHoldingRegisters(70, 21),
-            ReadHoldingRegisters(3001, 61),
+            ReadHoldingRegisters(70, 25),                                   # MODIFIED
+            ReadHoldingRegisters(3001, 65),                                 # MODIFIED
         ]
 
     @property
     def pack_polling_commands(self) -> List[ReadHoldingRegisters]:
-        return [ReadHoldingRegisters(91, 37)]
+        return [ReadHoldingRegisters(96, 105)]                              # MODIFIED
 
     @property
     def logging_commands(self) -> List[ReadHoldingRegisters]:
@@ -126,4 +145,4 @@ class AC500(BluettiDevice):
 
     @property
     def writable_ranges(self) -> List[range]:
-        return [range(3000, 3062)]
+        return [range(3000, 3066)]                                         # MODIFIED
